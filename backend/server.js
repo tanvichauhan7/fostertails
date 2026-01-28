@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectDB } from './config/db.js';
+import authRoutes from './routes/authroutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -13,14 +14,14 @@ const PORT = process.env.PORT || 5000;
 // Connect to MongoDB Database
 connectDB();
 
-// Middleware - these help process requests
-app.use(express.json()); // Parse JSON data
-app.use(express.urlencoded({ extended: true })); // Parse form data
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: process.env.CLIENT_URL,
     credentials: true
 }));
-app.use(cookieParser()); // Parse cookies
+app.use(cookieParser());
 
 // Welcome route
 app.get('/', (req, res) => {
@@ -28,7 +29,13 @@ app.get('/', (req, res) => {
         message: '🐾 Welcome to FosterTails API!',
         description: 'Connecting stray pets with loving foster homes and adopters',
         status: 'success',
-        version: '1.0.0'
+        version: '1.0.0',
+        endpoints: {
+            auth: '/api/auth',
+            pets: '/api/pets (coming soon)',
+            donations: '/api/donations (coming soon)',
+            ngos: '/api/ngos (coming soon)'
+        }
     });
 });
 
@@ -40,6 +47,31 @@ app.get('/api/health', (req, res) => {
         timestamp: new Date().toISOString()
     });
 });
+
+import petRoutes from './routes/petRoutes.js';
+
+// Mount routes
+app.use('/api/auth', authRoutes);
+app.use('/api/pets', petRoutes);
+
+// 404 handler
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found'
+    });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error('Error:', err);
+    res.status(500).json({
+        success: false,
+        message: 'Something went wrong!',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    });
+});
+
 
 // Start the server
 app.listen(PORT, () => {
