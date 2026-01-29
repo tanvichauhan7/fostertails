@@ -4,6 +4,9 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectDB } from './config/db.js';
 import authRoutes from './routes/authroutes.js';
+import petRoutes from './routes/petRoutes.js';
+import ngoRoutes from './routes/ngoRoutes.js';
+import donationRoutes from './routes/donationRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -32,9 +35,9 @@ app.get('/', (req, res) => {
         version: '1.0.0',
         endpoints: {
             auth: '/api/auth',
-            pets: '/api/pets (coming soon)',
-            donations: '/api/donations (coming soon)',
-            ngos: '/api/ngos (coming soon)'
+            pets: '/api/pets',
+            ngos: '/api/ngos',
+            donations: '/api/donations'
         }
     });
 });
@@ -48,11 +51,11 @@ app.get('/api/health', (req, res) => {
     });
 });
 
-import petRoutes from './routes/petRoutes.js';
-
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/pets', petRoutes);
+app.use('/api/ngos', ngoRoutes);
+app.use('/api/donations', donationRoutes);
 
 // 404 handler
 app.use((req, res) => {
@@ -71,7 +74,6 @@ app.use((err, req, res, next) => {
         error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
-
 
 // Start the server
 app.listen(PORT, () => {
