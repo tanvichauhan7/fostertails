@@ -13,5 +13,6 @@ const Navbar = () => {
     </nav>
   )
 }
+<Link to="/ngos">NGOs</Link>
 
 export default Navbar
