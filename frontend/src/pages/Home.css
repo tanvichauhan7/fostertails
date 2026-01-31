@@ -7,11 +7,11 @@
   min-height: 90vh;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 80px;
+  justify-content: center;        /* 🔥 key change */
+  padding: 80px 6%;               /* slightly reduced side padding */
   background: linear-gradient(135deg, #fde7f3, #f3e8ff);
   position: relative;
-  gap: 60px;
+  gap: 80px;                      /* controlled spacing instead of empty space */
 }
 
 /* LEFT TEXT */
@@ -59,8 +59,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  width: 360px;
+  width: 340px;           /* slightly smaller */
+  margin-left: -40px;    /* 🔥 pulls cards toward center */
 }
+
 
 .action-card {
   background: white;
