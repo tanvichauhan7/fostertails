@@ -12,7 +12,7 @@ const Home = () => {
       {/* ================= HERO ================= */}
       <section className="hero">
 
-        {/* TOP RIGHT AUTH (OPTIONAL) */}
+        {/* TOP RIGHT AUTH */}
         <div className="top-auth">
           <button
             onClick={() => {
@@ -56,7 +56,6 @@ const Home = () => {
         {/* RIGHT ACTION CARDS */}
         <div className="hero-actions">
 
-          {/* FOUND A STRAY */}
           <div
             className="action-card"
             onClick={() => setShowStrayForm(true)}
@@ -67,7 +66,6 @@ const Home = () => {
             <span className="link">Add a Stray</span>
           </div>
 
-          {/* ADOPT / FOSTER */}
           <div className="action-card">
             <span className="icon">🏠</span>
             <h3>Adopt or Foster</h3>
@@ -75,12 +73,51 @@ const Home = () => {
             <a href="/pets">View Pets</a>
           </div>
 
-          {/* NGOs */}
           <div className="action-card">
             <span className="icon">🤝</span>
             <h3>Connect with NGOs</h3>
             <p>Partner with shelters & rescue groups.</p>
             <a href="/ngos">Explore NGOs</a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= MISSION SECTION ================= */}
+      <section className="mission">
+        <div className="mission-container">
+
+          <div className="mission-image">
+            <img
+  src="/mission-dog.jpg"
+  alt="Rescue dog with loving human"
+/>
+
+          </div>
+
+          <div className="mission-text">
+            <span className="badge">Our Mission 🐾</span>
+
+            <h2>
+              Every Rescue Deserves <br />
+              <span>A Loving Home</span>
+            </h2>
+
+            <p>
+              FosterTails is built to ensure that no rescued animal
+              is left unseen or unheard. We work to connect strays,
+              shelters, and compassionate humans across India.
+            </p>
+
+            <p>
+              By enabling adoption, fostering, stray reporting, and
+              NGO collaboration, we’re creating a safer future for
+              every paw that needs help.
+            </p>
+
+            <a href="/about" className="primary-btn">
+              Learn Our Story
+            </a>
           </div>
 
         </div>
@@ -114,42 +151,38 @@ const Home = () => {
         </div>
       )}
 
-{/* ================= STRAY REPORT MODAL ================= */}
-{showStrayForm && (
-  <div className="modal-backdrop">
-    <div className="modal">
-      <button className="close" onClick={() => setShowStrayForm(false)}>
-        ✕
-      </button>
+      {/* ================= STRAY REPORT MODAL ================= */}
+      {showStrayForm && (
+        <div className="modal-backdrop">
+          <div className="modal">
+            <button className="close" onClick={() => setShowStrayForm(false)}>
+              ✕
+            </button>
 
-      <h2>Report a Stray 🐾</h2>
+            <h2>Report a Stray 🐾</h2>
 
-      {/* Animal details */}
-      <select>
-        <option value="">Animal Type</option>
-        <option>Dog</option>
-        <option>Cat</option>
-        <option>Other</option>
-      </select>
+            <select>
+              <option value="">Animal Type</option>
+              <option>Dog</option>
+              <option>Cat</option>
+              <option>Other</option>
+            </select>
 
-      <input placeholder="Breed (if known)" />
-      <input placeholder="Color" />
-      <input placeholder="Approximate Age" />
+            <input placeholder="Breed (if known)" />
+            <input placeholder="Color" />
+            <input placeholder="Approximate Age" />
 
-      {/* Location details */}
-      <input placeholder="Area / Locality (e.g. Indiranagar)" />
-      <input placeholder="City (e.g. Bangalore)" />
+            <input placeholder="Area / Locality" />
+            <input placeholder="City" />
 
-      {/* Image upload */}
-      <input type="file" accept="image/*" />
+            <input type="file" accept="image/*" />
 
-      <button className="primary-btn">
-        Submit Report
-      </button>
-    </div>
-  </div>
-)}
-
+            <button className="primary-btn">
+              Submit Report
+            </button>
+          </div>
+        </div>
+      )}
 
     </div>
   );
